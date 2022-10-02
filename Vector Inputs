@@ -1,0 +1,64 @@
+
+public class MyVectorSimulator
+{
+    public static void main(String[] args)
+    {
+        Scanner keys = new Scanner(System.in);
+        
+        System.out.print("Enter a vector in the form of (int,int): ");
+        String input1 = keys.next();
+        String x = input1.substring(0, input1.indexOf(","));
+        String y = input1.substring(input1.indexOf(",") + 1);
+        int x1 = Integer.parseInt(x);
+        int y1 = Integer.parseInt(y);
+        MyVector V1 = new MyVector(x1, y1);
+        
+        System.out.print("Enter the second vector in the form of (int,int): ");
+        String input2 = keys.next();
+        String x2 = input2.substring(0, input2.indexOf(","));
+        String y2 = input2.substring(input2.indexOf(",") + 1);
+        int x3 = Integer.parseInt(x2);
+        int y3 = Integer.parseInt(y2);
+        MyVector V2 = new MyVector(x3, y3);
+        
+        
+        System.out.println("The angle between vectors " +input1+ " and " +input2+ " is: " +V1.angle(V2));
+        Demo awtGraphicsDemo = new Demo();  
+        awtGraphicsDemo.setVisible(true);
+        
+    }
+}
+    class Demo extends Frame 
+{
+  public Demo(){
+     super("Graph of Entered Vectors");
+     prepareGUI();
+  }
+  private void prepareGUI(){
+     setSize(400,400);
+     addWindowListener(new WindowAdapter() 
+     {
+        public void windowClosing(WindowEvent windowEvent){
+           System.exit(0);
+        }        
+     }); 
+  }    
+
+  public void paint(Graphics g) {
+    Graphics2D g2 = (Graphics2D) g; 
+
+    Line2D yAxis = new Line2D.Double();
+     yAxis.setLine(200,0,200,400);  
+     g2.draw (yAxis);
+
+     Line2D xAxis = new Line2D.Double();
+     xAxis.setLine(0,200,400,200);  
+     g2.draw (xAxis);
+
+     Line2D vect = new Line2D.Double();
+     vect.setLine(200,200,400,400);  
+     g2.setColor(Color.blue);
+     g2.setStroke(new BasicStroke(4f));
+     g2.draw (vect);
+  }
+}
